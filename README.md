@@ -1,6 +1,6 @@
 # Squares - Musical Touch Interface
 
-A responsive web-based musical instrument that transforms your screen into a playable 3x3 grid of squares. Each circle plays a note from a configurable musical scale, creating an intuitive and accessible way to make music through touch, mouse, or keyboard.
+A responsive web-based musical instrument that transforms your screen into a playable 3x3 grid of squares. Each square plays a note from a configurable musical scale, creating an intuitive and accessible way to make music through touch, mouse, or keyboard.
 
 ## Features
 
@@ -41,7 +41,7 @@ A responsive web-based musical instrument that transforms your screen into a pla
 
 ## How It Works
 
-The app uses the Web Audio API to generate synthesized sounds in real-time. Each circle in the grid corresponds to a note in your selected scale, arranged from low to high (left to right, top to bottom).
+The app uses the Web Audio API to generate synthesized sounds in real-time. Each square in the grid corresponds to a note in your selected scale, arranged from low to high (left to right, top to bottom).
 
 **Audio Engine**: Employs multiple detuned sawtooth oscillators with low-pass filtering to create a rich, warm sound. The envelope includes smooth attack and release phases for natural-sounding notes.
 
@@ -115,7 +115,7 @@ This app has been carefully optimized for iOS 9+ devices:
 │   ├── app.css                 # Global styles
 │   └── lib/
 │       ├── AudioEngine.js      # Web Audio API sound generation
-│       ├── Circle.svelte       # Individual playable circle
+│       ├── Square.svelte       # Individual playable square
 │       ├── GridContainer.svelte # 3x3 grid layout & event handling
 │       ├── OptionsScreen.svelte # Settings interface
 │       ├── ScaleGenerator.js   # Musical scale generation logic
@@ -139,7 +139,7 @@ graph TD
     
     D --> G[AudioEngine.js<br/>Web Audio Synthesis]
     D --> H[ScaleGenerator.js<br/>Musical Scale Logic]
-    D --> F[Circle.svelte ×9<br/>Interactive Note Buttons]
+    D --> F[Square.svelte ×9<br/>Interactive Note Buttons]
 
     
     C --> H
