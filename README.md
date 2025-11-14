@@ -96,20 +96,6 @@ The app will be available at your local IP address (e.g., `http://192.168.1.x:30
 
 **Note**: This is particularly important for testing iOS-specific features like audio initialization and touch handling, which behave differently in development vs production builds.
 
-## Usage
-
-1. **Launch**: Click/tap anywhere on the splash screen to begin
-2. **Play**: 
-   - Touch or click the squares to play notes
-   - Use keyboard keys (Z-X-C-V-B-N-M-,- .) for the 9 squares
-   - Press 'P' key for panic stop (stops all notes)
-3. **Configure**: 
-   - Tap the settings icon (⚙️) to change key, scale, or octave
-   - Tap the info icon (ℹ️) to view instructions again
-
-![Keyboard Layout](docs/images/keyboard-layout.png)
-*Keyboard mapping for the 9 squares*
-
 ## iOS Compatibility Notes
 
 This app has been carefully optimized for iOS 9+ devices:
