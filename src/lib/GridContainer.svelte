@@ -1,12 +1,12 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import Circle from './Circle.svelte';
+  import Square from './Square.svelte';
   import { ScaleGenerator } from './ScaleGenerator.js';
   
   export let audioEngine;
   export let scaleConfig = { key: 'C', scale: 'major', octave: 4 };
   
-  let circles = Array.from({ length: 9 }, function(_, i) { return i; });
+  let squares = Array.from({ length: 9 }, function(_, i) { return i; });
   let orientation = 'portrait';
   let cleanupInterval;
   let scaleGenerator = new ScaleGenerator();
@@ -21,11 +21,11 @@
     );
     console.log('Generated scale:', scale);
     
-    // Reset circle states when scale changes
-    resetCircleStates();
+    // Reset square states when scale changes
+    resetSquareStates();
   }
   
-  // Map keyboard keys to circle indices
+  // Map keyboard keys to square indices
   var keyMap = {
     'z': 0,
     'x': 1,
@@ -38,14 +38,14 @@
     '.': 8
   };
   
-  // Track which circles are pressed
-  let circleStates = {};
+  // Track which squares are pressed
+  let squareStates = {};
   
-  function resetCircleStates() {
-    circleStates = {};
-    circles.forEach(function(_, i) {
+  function resetSquareStates() {
+    squareStates = {};
+    squares.forEach(function(_, i) {
       if (scale[i]) {
-        circleStates[scale[i]] = false;
+        squareStates[scale[i]] = false;
       }
     });
   }
@@ -54,16 +54,16 @@
   let heldKeys = new Set();
   
   onMount(() => {
-    // Initialize circle states
-    resetCircleStates();
+    // Initialize square states
+    resetSquareStates();
     
     // Periodic cleanup - check for orphaned oscillators
     cleanupInterval = setInterval(function() {
       if (audioEngine) {
-        // First do smart cleanup based on circle states
+        // First do smart cleanup based on square states
         smartCleanup();
-        // Then do nuclear cleanup of any orphaned oscillators (passing circle states)
-        audioEngine.cleanupOrphanedOscillators(circleStates);
+        // Then do nuclear cleanup of any orphaned oscillators (passing square states)
+        audioEngine.cleanupOrphanedOscillators(squareStates);
       }
     }, 1000); // Check every 1 second
     
@@ -95,9 +95,9 @@
     if (document.hidden && audioEngine) {
       console.log('Page hidden - stopping all notes');
       audioEngine.panic();
-      // Reset all circle states
-      Object.keys(circleStates).forEach(function(note) {
-        circleStates[note] = false;
+      // Reset all square states
+      Object.keys(squareStates).forEach(function(note) {
+        squareStates[note] = false;
       });
       heldKeys.clear();
     }
@@ -107,9 +107,9 @@
     if (audioEngine) {
       console.log('Window blur - stopping all notes');
       audioEngine.panic();
-      // Reset all circle states
-      Object.keys(circleStates).forEach(function(note) {
-        circleStates[note] = false;
+      // Reset all square states
+      Object.keys(squareStates).forEach(function(note) {
+        squareStates[note] = false;
       });
       heldKeys.clear();
     }
@@ -119,9 +119,9 @@
     // Get all currently playing notes
     var playingNotes = Array.from(audioEngine.activeOscillators.keys());
     
-    // Stop any notes that are playing but their circle is not pressed
+    // Stop any notes that are playing but their square is not pressed
     playingNotes.forEach(function(note) {
-      if (!circleStates[note]) {
+      if (!squareStates[note]) {
         console.warn('Cleaning up stuck note:', note);
         audioEngine.stopNote(note);
       }
@@ -133,9 +133,9 @@
     if (e.key === 'p' || e.key === 'P') {
       if (audioEngine) {
         audioEngine.panic();
-        // Reset all circle states
-        Object.keys(circleStates).forEach(function(note) {
-          circleStates[note] = false;
+        // Reset all square states
+        Object.keys(squareStates).forEach(function(note) {
+          squareStates[note] = false;
         });
         heldKeys.clear();
       }
@@ -149,11 +149,11 @@
       if (heldKeys.has(key)) return;
       heldKeys.add(key);
       
-      var circleIndex = keyMap[key];
-      var note = scale[circleIndex];
+      var squareIndex = keyMap[key];
+      var note = scale[squareIndex];
       
       // Trigger press
-      circleStates[note] = true;
+      squareStates[note] = true;
       if (audioEngine) {
         audioEngine.playNote(note);
       }
@@ -166,11 +166,11 @@
     if (keyMap.hasOwnProperty(key)) {
       heldKeys.delete(key);
       
-      var circleIndex = keyMap[key];
-      var note = scale[circleIndex];
+      var squareIndex = keyMap[key];
+      var note = scale[squareIndex];
       
       // Trigger release
-      circleStates[note] = false;
+      squareStates[note] = false;
       if (audioEngine) {
         audioEngine.stopNote(note);
       }
@@ -199,26 +199,28 @@
   
   async function handlePress(event) {
     await initAudio();
-    circleStates[event.detail.note] = true;
-    console.log('Circle pressed:', event.detail.note);
+    squareStates[event.detail.note] = true;
+    console.log('Square pressed:', event.detail.note);
   }
   
   function handleRelease(event) {
-    circleStates[event.detail.note] = false;
-    console.log('Circle released:', event.detail.note);
+    squareStates[event.detail.note] = false;
+    console.log('Square released:', event.detail.note);
   }
 </script>
 
 <svelte:window on:resize={updateOrientation} />
 
 <div class="container {orientation}">
-  {#each circles as index}
-    <Circle 
+  {#each squares as index}
+  <Square 
       {index}
       {orientation}
       {audioEngine}
       note={scale[index]}
-      isPressed={circleStates[scale[index]]}
+      color={index % 2 === 0 ? 'rgb(255, 255, 0)' : 'rgb(0, 0, 255)'}
+      activeColor="rgb(255, 0, 255)"
+      isPressed={squareStates[scale[index]]}
       on:press={handlePress}
       on:release={handleRelease}
     />
@@ -235,6 +237,13 @@
     place-items: center;
     place-content: center;
   }
+
+  @media (orientation: landscape) {
+  .container {
+    max-width: 100vh; /* or whatever value works */
+    margin: 0 auto;
+  }
+}
   
   .container.portrait {
     grid-template-columns: repeat(3, 1fr);

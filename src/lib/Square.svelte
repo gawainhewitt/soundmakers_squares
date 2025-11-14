@@ -141,7 +141,7 @@
 
 <style>
   .circle {
-    border-radius: 50%;
+    border-radius: 5%;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
