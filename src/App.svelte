@@ -39,7 +39,7 @@
   }
 
   async function handleSplashClick() {
-  document.body.style.setProperty('background-color', '#FBAC2E', 'important');
+  document.body.style.setProperty('background-color', 'rgb(170, 174, 182)', 'important');
   
   // Initialize audio context on user interaction (required for iOS)
   if (audioEngine && !audioInitialized) {
@@ -84,7 +84,7 @@
   }
 
   function handleAboutClose() {
-    document.body.style.setProperty('background-color', '#FBAC2E', 'important');
+    document.body.style.setProperty('background-color', 'rgb(170, 174, 182)', 'important');
     currentScreen = 'play';
 
     // CHROME iOS FIX: Wait for layout to settle after transition
@@ -107,7 +107,7 @@
       console.log('Scale config updated:', scaleConfig);
     }
     
-    document.body.style.setProperty('background-color', '#FBAC2E', 'important');
+    document.body.style.setProperty('background-color', 'rgb(170, 174, 182)', 'important');
     currentScreen = 'play';
     // CHROME iOS FIX: Wait for layout to settle after transition
     setTimeout(() => {
@@ -121,14 +121,14 @@
 
 {#if currentScreen === 'splash'}
   <SplashScreen 
-    title="Circles"
+    title="Squares"
     instructions="To play: touch or click screen or use ZXCVBNM,. keys on a keyboard"
     footerNote="On Apple devices, turn off silent mode"
     on:click={handleSplashClick}
   />
 {:else if currentScreen === 'about'}
   <SplashScreen 
-    title="Circles"
+    title="Squares"
     instructions="To play: touch or click screen or use ZXCVBNM,. keys on a keyboard"
     footerNote="On Apple devices, turn off silent mode"
     on:click={handleAboutClose}

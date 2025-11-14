@@ -1,9 +1,6 @@
-# Circles - Musical Touch Interface
+# Squares - Musical Touch Interface
 
-A responsive web-based musical instrument that transforms your screen into a playable 3x3 grid of circles. Each circle plays a note from a configurable musical scale, creating an intuitive and accessible way to make music through touch, mouse, or keyboard.
-
-![App Screenshot](docs/images/app-screenshot.png)
-*The main play interface with 9 interactive circles*
+A responsive web-based musical instrument that transforms your screen into a playable 3x3 grid of squares. Each circle plays a note from a configurable musical scale, creating an intuitive and accessible way to make music through touch, mouse, or keyboard.
 
 ## Features
 
@@ -18,8 +15,29 @@ A responsive web-based musical instrument that transforms your screen into a pla
 - **iOS 9+ Compatible**: Extensively tested and optimized for older iOS devices
 - **Persistent Settings**: Your scale, key, and octave preferences are saved locally
 
+## Usage
+
+### 1. **Launch**: Click/tap anywhere on the splash screen to begin or press any key on the keyboard. 
+
+![Splash Screen](docs/images/splash-screen.png)
+
+### 2. **Play**: 
+   - Touch or click the squares to play notes
+   - Use keyboard keys (Z-X-C-V-B-N-M-,- .) for the 9 squares
+   - Press 'P' key for panic stop (stops all notes)
+
+![App Screenshot](docs/images/app-screenshot.png)
+
+![Keyboard Layout](docs/images/keyboard-layout.png)
+*Keyboard mapping for the 9 squares*
+
+3. **Configure**: 
+   - Tap the settings icon (⚙️) to change key, scale, or octave
+   - Tap the info icon (ℹ️) to view instructions again
+
 ![Options Screen](docs/images/options-screen.png)
-*Configure your musical scale, key, and octave*
+
+
 
 ## How It Works
 
@@ -28,11 +46,6 @@ The app uses the Web Audio API to generate synthesized sounds in real-time. Each
 **Audio Engine**: Employs multiple detuned sawtooth oscillators with low-pass filtering to create a rich, warm sound. The envelope includes smooth attack and release phases for natural-sounding notes.
 
 **Scale Generation**: Dynamically generates 9 notes based on your selected key, scale type, and starting octave using chromatic intervals.
-
-## Getting Started
-
-![Splash Screen](docs/images/splash-screen.png)
-*Welcome screen - tap anywhere to begin*
 
 ### Prerequisites
 
@@ -43,8 +56,8 @@ The app uses the Web Audio API to generate synthesized sounds in real-time. Each
 
 ```bash
 # Clone the repository
-git clone https://github.com/gawainhewitt/soundmakers_circles.git
-cd circles
+git clone https://github.com/gawainhewitt/soundmakers_squares.git
+cd squares
 
 # Install dependencies
 npm install
@@ -87,15 +100,15 @@ The app will be available at your local IP address (e.g., `http://192.168.1.x:30
 
 1. **Launch**: Click/tap anywhere on the splash screen to begin
 2. **Play**: 
-   - Touch or click the circles to play notes
-   - Use keyboard keys (Z-X-C-V-B-N-M-,- .) for the 9 circles
+   - Touch or click the squares to play notes
+   - Use keyboard keys (Z-X-C-V-B-N-M-,- .) for the 9 squares
    - Press 'P' key for panic stop (stops all notes)
 3. **Configure**: 
    - Tap the settings icon (⚙️) to change key, scale, or octave
    - Tap the info icon (ℹ️) to view instructions again
 
 ![Keyboard Layout](docs/images/keyboard-layout.png)
-*Keyboard mapping for the 9 circles*
+*Keyboard mapping for the 9 squares*
 
 ## iOS Compatibility Notes
 

@@ -67,6 +67,14 @@
     cursor: pointer;
     z-index: 9999;
   }
+
+  @media (orientation: landscape) {
+    .splash-screen {
+      max-width: 100vh;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
   
   .top-logo {
     display: flex;
