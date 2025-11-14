@@ -41,9 +41,9 @@ A responsive web-based musical instrument that transforms your screen into a pla
 
 ## How It Works
 
-The app uses the Web Audio API to generate synthesized sounds in real-time. Each square in the grid corresponds to a note in your selected scale, arranged from low to high (left to right, top to bottom).
+The app uses the Web Audio API to play recorded sounds in real-time. Each square in the grid corresponds to a note in your selected scale, arranged from low to high (left to right, top to bottom).
 
-**Audio Engine**: Employs multiple detuned sawtooth oscillators with low-pass filtering to create a rich, warm sound. The envelope includes smooth attack and release phases for natural-sounding notes.
+**Audio Engine**: Employs a sampler to play recordings of a french horn
 
 **Scale Generation**: Dynamically generates 9 notes based on your selected key, scale type, and starting octave using chromatic intervals.
 
