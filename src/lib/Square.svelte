@@ -39,7 +39,7 @@
   function handleTouchStart(e) {
     e.preventDefault();
     
-    // Only respond to the first touch on this circle
+    // Only respond to the first touch on this square
     if (activeTouchId === null && e.changedTouches.length > 0) {
       activeTouchId = e.changedTouches[0].identifier;
       handlePress();
@@ -95,7 +95,7 @@
       return;
     }
     
-    // Check if touch moved outside circle (with generous buffer)
+    // Check if touch moved outside square (with generous buffer)
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -104,7 +104,7 @@
     const distance = Math.sqrt(x * x + y * y);
     const radius = rect.width / 2;
     
-    // Add 50% buffer zone - only release if REALLY outside the circle
+    // Add 50% buffer zone - only release if REALLY outside the square
     if (distance > radius * 1.5) {
       handleRelease();
     }
@@ -124,7 +124,7 @@
 
 <div
   bind:this={element}
-  class="circle {orientation}"
+  class="square {orientation}"
   style="background-color: {effectivePressed ? activeColor : color};"
   on:mousedown={handlePress}
   on:mouseup={handleRelease}
@@ -140,7 +140,7 @@
 </div>
 
 <style>
-  .circle {
+  .square {
     border-radius: 5%;
     cursor: pointer;
     user-select: none;
@@ -152,17 +152,17 @@
     justify-content: center;
   }
   
-  .circle.portrait {
+  .square.portrait {
     width: 25vw;
     height: 25vw;
   }
   
-  .circle.landscape {
+  .square.landscape {
     width: 20vh;
     height: 20vh;
   }
   
-  .circle:active {
+  .square:active {
     transform: scale(0.95);
   }
   
